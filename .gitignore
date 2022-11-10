@@ -1,0 +1,35 @@
+HELP.md
+target/
+logs/
+scripts/
+bin/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+*.properties
+*.sql
+
+### Package Files ###
+*.jar
+*.war
+*.rar
+*.zip
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+
+### VS Code ###
+.vscode/
+
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+
