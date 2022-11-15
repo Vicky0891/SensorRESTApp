@@ -1,24 +1,24 @@
 package by.zhuk.SensorRESTApp.models;
 
-import java.util.List;
+import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "sensor")
-public class Sensor {
+public class Sensor implements Serializable {
 
 	@NotEmpty
 	@Size(min = 3, max = 30, message = "Sensor name should be between 3 and 30 characters")
+	@Column(name = "name")
+	@Id
 	private String name;
-
-	@OneToMany(mappedBy = "sensor")
-	private List<Measure> measures;
 
 	public Sensor() {
 	}
@@ -35,22 +35,14 @@ public class Sensor {
 		this.name = name;
 	}
 
-	public List<Measure> getMeasures() {
-		return measures;
-	}
-
-	public void setMeasures(List<Measure> measures) {
-		this.measures = measures;
-	}
-
 	@Override
 	public String toString() {
-		return "Sensor [name=" + name + ", measures=" + measures + "]";
+		return "Sensor [name=" + name + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(measures, name);
+		return Objects.hash(name);
 	}
 
 	@Override
@@ -62,7 +54,7 @@ public class Sensor {
 		if (getClass() != obj.getClass())
 			return false;
 		Sensor other = (Sensor) obj;
-		return Objects.equals(measures, other.measures) && Objects.equals(name, other.name);
+		return Objects.equals(name, other.name);
 	}
 
 }

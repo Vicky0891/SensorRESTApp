@@ -1,8 +1,10 @@
 package by.zhuk.SensorRESTApp.dto;
 
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import by.zhuk.SensorRESTApp.models.Sensor;
 
@@ -10,13 +12,14 @@ public class MeasureDto {
 
 	@Min(value = -100, message = "Value should be between -100 and 100 degrees")
 	@Max(value = 100)
-	@NotEmpty
 	private double value;
 
-	@NotEmpty(message = "Field should not be empty")
+	@NotNull
 	private boolean raining;
 
 	private Sensor sensor;
+
+	private LocalDateTime measuredAt;
 
 	public MeasureDto() {
 	}
@@ -49,6 +52,14 @@ public class MeasureDto {
 
 	public void setSensor(Sensor sensor) {
 		this.sensor = sensor;
+	}
+
+	public LocalDateTime getMeasuredAt() {
+		return measuredAt;
+	}
+
+	public void setMeasuredAt(LocalDateTime measuredAt) {
+		this.measuredAt = measuredAt;
 	}
 
 }

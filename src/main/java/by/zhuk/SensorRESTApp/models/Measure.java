@@ -1,34 +1,37 @@
 package by.zhuk.SensorRESTApp.models;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "measure")
-public class Measure {
+public class Measure implements Serializable {
 
+	@Id
 	@Column(name = "value")
-	@Min(value = -100, message = "Value should be between -100 and 100 degrees")
-	@Max(value = 100)
-	@NotEmpty
-	private double value;
+	@DecimalMin(value = "-100", message = "Value should be between -100 and 100 degrees")
+	@DecimalMax(value = "100")
+	private BigDecimal value;
 
 	@Column(name = "raining")
-	@NotEmpty(message = "Field should not be empty")
+	@NotNull
 	private boolean raining;
 
 	@ManyToOne
 	@JoinColumn(name = "sensor_name", referencedColumnName = "name")
-	private Sensor sensor;
+	private Sensor sensorName;
 
 	@Column(name = "measured_at")
 	private LocalDateTime measuredAt;
@@ -36,17 +39,17 @@ public class Measure {
 	public Measure() {
 	}
 
-	public Measure(double value, boolean raining, Sensor sensor) {
+	public Measure(BigDecimal value, boolean raining, Sensor sensorName) {
 		this.value = value;
 		this.raining = raining;
-		this.sensor = sensor;
+		this.sensorName = sensorName;
 	}
 
-	public double getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
 
-	public void setValue(double value) {
+	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
 
@@ -59,11 +62,11 @@ public class Measure {
 	}
 
 	public Sensor getSensor() {
-		return sensor;
+		return sensorName;
 	}
 
-	public void setSensor(Sensor sensor) {
-		this.sensor = sensor;
+	public void setSensor(Sensor sensorName) {
+		this.sensorName = sensorName;
 	}
 
 	public LocalDateTime getMeasuredAt() {
@@ -76,13 +79,13 @@ public class Measure {
 
 	@Override
 	public String toString() {
-		return "Measure [value=" + value + ", raining=" + raining + ", sensor=" + sensor + ", measuredAt=" + measuredAt
-				+ "]";
+		return "Measure [value=" + value + ", raining=" + raining + ", sensor=" + sensorName + ", measuredAt="
+				+ measuredAt + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(measuredAt, raining, sensor, value);
+		return Objects.hash(measuredAt, raining, sensorName, value);
 	}
 
 	@Override
@@ -95,8 +98,7 @@ public class Measure {
 			return false;
 		Measure other = (Measure) obj;
 		return Objects.equals(measuredAt, other.measuredAt) && raining == other.raining
-				&& Objects.equals(sensor, other.sensor)
-				&& Double.doubleToLongBits(value) == Double.doubleToLongBits(other.value);
+				&& Objects.equals(sensorName, other.sensorName) && Objects.equals(value, other.value);
 	}
 
 }

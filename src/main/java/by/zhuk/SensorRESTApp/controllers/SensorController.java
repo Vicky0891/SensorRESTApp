@@ -57,7 +57,7 @@ public class SensorController {
 
 	@ExceptionHandler
 	private ResponseEntity<SensorErrorResponse> handleException(SensorExistException e) {
-		SensorErrorResponse response = new SensorErrorResponse("Person with this name already exist",
+		SensorErrorResponse response = new SensorErrorResponse("Sensor with this name already exist",
 				System.currentTimeMillis());
 		return new ResponseEntity<SensorErrorResponse>(response, HttpStatus.BAD_REQUEST);
 	}

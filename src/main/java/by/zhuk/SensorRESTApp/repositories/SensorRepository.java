@@ -9,7 +9,7 @@ import by.zhuk.SensorRESTApp.models.Sensor;
 
 @Repository
 public interface SensorRepository extends JpaRepository<Sensor, String> {
-	
+
 	Optional<Sensor> findByName(String name);
 
 }
