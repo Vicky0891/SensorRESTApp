@@ -19,7 +19,6 @@ import javax.validation.constraints.NotNull;
 @Table(name = "measure")
 public class Measure implements Serializable {
 
-	@Id
 	@Column(name = "value")
 	@DecimalMin(value = "-100", message = "Value should be between -100 and 100 degrees")
 	@DecimalMax(value = "100")
@@ -33,6 +32,7 @@ public class Measure implements Serializable {
 	@JoinColumn(name = "sensor_name", referencedColumnName = "name")
 	private Sensor sensorName;
 
+	@Id
 	@Column(name = "measured_at")
 	private LocalDateTime measuredAt;
 

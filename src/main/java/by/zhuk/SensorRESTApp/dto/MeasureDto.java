@@ -1,40 +1,39 @@
 package by.zhuk.SensorRESTApp.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
-
-import by.zhuk.SensorRESTApp.models.Sensor;
 
 public class MeasureDto {
 
-	@Min(value = -100, message = "Value should be between -100 and 100 degrees")
-	@Max(value = 100)
-	private double value;
+	@DecimalMin(value = "-100", message = "Value should be between -100 and 100 degrees")
+	@DecimalMax(value = "100")
+	private BigDecimal value;
 
 	@NotNull
 	private boolean raining;
 
-	private Sensor sensor;
+	private SensorDto sensorDto;
 
 	private LocalDateTime measuredAt;
 
 	public MeasureDto() {
 	}
 
-	public MeasureDto(double value, boolean raining, Sensor sensor) {
+	public MeasureDto(BigDecimal value, boolean raining, SensorDto sensorDto) {
 		this.value = value;
 		this.raining = raining;
-		this.sensor = sensor;
+		this.sensorDto = sensorDto;
 	}
 
-	public double getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
 
-	public void setValue(double value) {
+	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
 
@@ -46,12 +45,12 @@ public class MeasureDto {
 		this.raining = raining;
 	}
 
-	public Sensor getSensor() {
-		return sensor;
+	public SensorDto getSensorDto() {
+		return sensorDto;
 	}
 
-	public void setSensor(Sensor sensor) {
-		this.sensor = sensor;
+	public void setSensorDto(SensorDto sensorDto) {
+		this.sensorDto = sensorDto;
 	}
 
 	public LocalDateTime getMeasuredAt() {
